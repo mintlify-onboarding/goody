@@ -1,0 +1,57 @@
+{
+    "name": "Goody",
+    "logo": {
+      "light": "/logo.png",
+      "dark": "/logo.png"
+    },
+    "favicon": "/favicon.png",
+    "colors": {
+      "primary": "#9159D6",
+      "light": "#B584F1",
+      "dark": "#9159D6",
+      "anchors": {
+        "from": "#ac72ff",
+        "to": "##7f67ff"
+      }
+    },
+    "topbarCtaButton": {
+      "name": "Send a Gift",
+      "url": "https://www.ongoody.com/send"
+    },
+    "topbarLinks": [
+      {
+        "name": "Sign in",
+        "url": "https://www.ongoody.com/"
+      },
+      {
+        "name": "Goody for Business",
+        "url": "https://www.ongoody.com/business"
+      }
+    ],
+    "anchors": [
+      {
+        "name": "API Reference",
+        "icon": "square-terminal",
+        "url": "api-reference"
+      },
+      {
+        "name": "Blog",
+        "icon": "blog",
+        "url": "https://www.ongoody.com/blog"
+      }
+    ],
+    "navigation": [
+      {
+        "group": "Introduction",
+        "pages": [
+            "introduction/overview"
+        ]
+      }
+    ],
+    "footerSocials":
+      {
+          "twitter": "https://twitter.com/goodygifting",
+          "linkedin": "https://www.linkedin.com/company/ongoody",
+          "instagram": "https://instagram.com/ongoody"
+      }
+  }
