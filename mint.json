@@ -5,6 +5,9 @@
     "light": "/logo.png",
     "dark": "/logo.png"
   },
+  "api": {
+    "baseUrl": "https://api.ongoody.com"
+  },
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#9159D6",
@@ -62,14 +65,48 @@
       ]
     },
     {
+      "group": "Commerce API",
+      "pages": [
+        "commerce-api/overview",
+        "commerce-api/authentication",
+        "commerce-api/access-the-catalog",
+        "commerce-api/create-an-order",
+        "commerce-api/retrieve-order-status",
+        "commerce-api/webhooks"
+      ]
+    },
+    {
       "group": "API Reference",
       "pages": [
-        "automation-api/overview",
-        "automation-api/authentication",
-        "automation-api/access-the-catalog",
-        "automation-api/create-an-order",
-        "automation-api/retrieve-order-status",
-        "automation-api/webhooks"
+        {
+          "group": "Me",
+          "pages": ["api-reference/retrieve-current-user"]
+        },
+        {
+          "group": "Order Batches",
+          "pages": [
+            "api-reference/order-batches/create-an-order-batch",
+            "api-reference/order-batches/retrieve-orders-for-an-order-batch",
+            "api-reference/order-batches/retrieve-recipients-for-an-order-batch",
+            "api-reference/order-batches/retrieve-an-order-batch"
+          ]
+        },
+        {
+          "group": "Orders",
+          "pages": [
+            "api-reference/orders/cancel-an-order",
+            "api-reference/orders/retrieve-an-order",
+            "api-reference/orders/update-expiration-for-an-order"
+          ]
+        },
+        {
+          "group": "Products",
+          "pages": ["api-reference/products/list-all-active-products"]
+        },
+        {
+          "group": "Schemas",
+          "pages": ["api-reference/schemas/error"]
+        }
       ]
     }
   ],

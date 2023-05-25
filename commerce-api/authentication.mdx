@@ -1,0 +1,59 @@
+---
+title: "Commerce API: Authentication"
+sidebarTitle: "Authentication"
+description: "Production and Sandbox accounts are separate, and you have different API keys for each environment for isolation."
+---
+
+## Create a Goody for Business account
+
+To sign up for a Goody for Business account in production or sandbox, go to the corresponding link:
+
+| Environment    | API Keys link                               |
+| -------------- | ------------------------------------------- |
+| **Production** | https://www.ongoody.com/business/signup     |
+| **Sandbox**    | https://sandbox.ongoody.com/business/signup |
+
+## Create a commerce app and API key
+
+Once you're signed up, you'll need to create a commerce app and an API key. Next to your account button on the top right, click the **Organization** link, and then navigate to **Commerce API**.
+
+| Environment    | API Keys link                                              |
+| -------------- | ---------------------------------------------------------- |
+| **Production** | https://www.ongoody.com/plus/organization/api/commerce     |
+| **Sandbox**    | https://sandbox.ongoody.com/plus/organization/api/commerce |
+
+Start by setting a name for your commerce app, and click Create. Then, click **New API key** to generate an API key.
+
+## Base URL
+
+The base URL of the API depends on the environment you're using:
+
+| Environment    | Base URL                        |
+| -------------- | ------------------------------- |
+| **Production** | https://api.ongoody.com         |
+| **Sandbox**    | https://api.sandbox.ongoody.com |
+
+## Authentication header
+
+This API uses bearer authentication. Send your API key in the `Authorization` HTTP header preceded by `Bearer `:
+
+```
+Authorization: Bearer YOUR_GOODY_COMMERCE_API_KEY
+```
+
+## Calling `/me`
+
+To check that you're authenticated, you can send a request to the `/me` endpoint:
+
+```
+POST https://api.sandbox.ongoody.com/v1/me
+Authorization: Bearer YOUR_GOODY_COMMERCE_API_KEY
+```
+
+And it should respond with:
+
+```json
+{
+  "public_app_id": "YOUR_PUBLIC_APP_ID"
+}
+```

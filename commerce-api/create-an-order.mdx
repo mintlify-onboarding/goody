@@ -1,0 +1,237 @@
+---
+title: "Commerce API: Create an order"
+sidebarTitle: "Create an Order"
+---
+
+## Sending a gift
+
+One of the ways you can use the Commerce API is to send a gift. When you send a gift, you can create an order without an address, and you'll get a gift link that you can send to the recipient. The recipient can then enter their own address and accept the gift.
+
+To send a gift, you'll want to create what we call an **order batch**. Since Goody lets you send gifts to multiple recipients at once, the "container" for all gifts is an order batch.
+
+When you create an order batch, you provide a list of recipients. Each recipient in the gift batch will have an order created for them.
+
+If you're sending a single gift at a time, you'll also be creating an order batch – just with one recipient. Think of it as sending an email: whether you're sending an email to one recipient or multiple, you're still composing the same email.
+
+The endpoint to create a gift batch is **[POST /v1/order_batches](/api-reference/order-batches/create-an-order-batch)**:
+
+```
+POST https://api.sandbox.ongoody.com/v1/order_batches
+Authorization: Bearer YOUR_GOODY_COMMERCE_API_KEY
+```
+
+Let's take a look at an example payload for creating an order batch:
+
+```json
+{
+  "from_name": "John",
+  "send_method": "link_multiple_custom_list",
+  "recipients": [
+    {
+      "first_name": "Alena",
+      "last_name": "Kenter",
+      "email": "alena@ongoody.com"
+    }
+  ],
+  "cart": {
+    "items": [
+      {
+        "product_id": "9abf2d67-e4f3-4d43-9142-4a1f0d10aaa0",
+        "quantity": 1
+      }
+    ]
+  },
+  "card_id": "ff957080-192d-4032-b4c5-fbb057141c4b",
+  "message": "Thank you!"
+}
+```
+
+These fields are required in each order batch:
+
+| Field         | Meaning                                                                                                                                                                                                                                                                                                              |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `from_name`   | **Who is the gift from?** This name is the "from" when the gift is displayed.                                                                                                                                                                                                                                        |
+| `send_method` | **How do you want to send this gift?** Do you want Goody to send a gift notification email, or just get a link to send on your own? In this case, we're using `link_multiple_custom_list`, which means to get links only without sending an email. For more information, see the Send methods documentation page TK. |
+| `recipients`  | **Who is this gift going to?** If you only have one gift recipient, this array will just have one item. Only `first_name` is required (unless if you want us to send a gift email, in which case you'll also need to provide `email`).                                                                               |
+| `cart`        | **What products do you want to send in your gift?** Each product you send is an item in the `cart.items` array. You can find Product IDs from the product catalog, or by using Developer Mode on the Goody website (TK).                                                                                             |
+
+These fields are optional, but recommended:
+
+| Field     | Meaning                                       |
+| --------- | --------------------------------------------- |
+| `card_id` | (optional) The ID of a digital greeting card. |
+| `message` | (optional) A message to add to your gift.     |
+
+## Create order batch response
+
+The response looks like:
+
+```json
+{
+  "id": "f0903768-609c-4851-bc9a-c17ea245e120",
+  "send_status": "complete",
+  "from_name": "John",
+  "message": "Thank you!",
+  "orders_count": 1,
+  "orders_preview": [
+    {
+      "id": "a74adf4b-1837-43f5-8e51-f74803cd8832",
+      "status": "created",
+      "recipient_first_name": "Alena",
+      "recipient_last_name": "Kenter",
+      "recipient_email": "alena@ongoody.com",
+      "individual_gift_link": "https://gifts.ongoody.com/gift/gHBMKuXkiVgAFDyXx00h4XGs",
+      "card_id": "ff957080-192d-4032-b4c5-fbb057141c4b",
+      "message": "Thank you!",
+      "thank_you_note": null,
+      "view_count_recipient": 0,
+      "is_swapped": false,
+      "order_batch_id": "f0903768-609c-4851-bc9a-c17ea245e120",
+      "cart": {
+        "id": "fad70b58-896e-4e11-b80b-d807f57e5e3d",
+        "items": [
+          {
+            "id": "0bc34fa6-d036-4300-a743-dec8eda7f2bd",
+            "quantity": 1,
+            "product": {
+              "id": "9abf2d67-e4f3-4d43-9142-4a1f0d10aaa0",
+              "name": "Cookies",
+              "brand": {
+                "id": "d8782dff-10b2-49ca-87ed-ed6c9d34e4bd",
+                "name": "Cookie Company"
+              }
+            }
+          }
+        ]
+      },
+      "shipments": [],
+      "amounts": {
+        "amount_product": 1000,
+        "amount_shipping": 1000,
+        "amount_processing_fee": 100,
+        "amount_pre_tax_total": 2100,
+        "amount_tax": null,
+        "amount_total": null,
+        "amount_global_relay_cost": null
+      },
+      "sender": {
+        "first_name": "Test",
+        "last_name": "User",
+        "email": "15557426864@test.ongoody.com"
+      },
+      "workspace_id": "b99bf758-104f-4570-a3a9-bc59e64646b1",
+      "workspace_name": "Test Team",
+      "original_cart": null,
+      "original_amounts": null,
+      "reference_id": "5NRQ9IKCVECOHFCUOZWJHTWW"
+    }
+  ],
+  "recipients_count": 1,
+  "recipients_preview": [
+    {
+      "first_name": "Alena",
+      "last_name": "Kenter",
+      "email": "alena@ongoody.com"
+    }
+  ],
+  "cart": {
+    "id": "fad70b58-896e-4e11-b80b-d807f57e5e3d",
+    "items": [
+      {
+        "id": "0bc34fa6-d036-4300-a743-dec8eda7f2bd",
+        "quantity": 1,
+        "product": {
+          "id": "9abf2d67-e4f3-4d43-9142-4a1f0d10aaa0",
+          "name": "Cookies",
+          "brand": {
+            "id": "d8782dff-10b2-49ca-87ed-ed6c9d34e4bd",
+            "name": "Cookie Company"
+          }
+        }
+      }
+    ]
+  },
+  "is_scheduled_send": false,
+  "scheduled_send_on": null,
+  "expires_at": null,
+  "send_method": "link_multiple_custom_list",
+  "batch_name": "Alena Kenter",
+  "card_id": "ff957080-192d-4032-b4c5-fbb057141c4b",
+  "sender": {
+    "first_name": "Commerce",
+    "last_name": "User",
+    "email": "15557426864@ongoody.com"
+  },
+  "workspace_id": "b99bf758-104f-4570-a3a9-bc59e64646b1",
+  "workspace_name": "Test Team",
+  "reference_id": "XNYLJMW5JIFOFRM0PQIPNA56"
+}
+```
+
+- **If you send an order batch with 10 or fewer recipients**, orders are processed right away, and you'll see that that `send_status` is `complete` and you'll receive the list of orders back in the `orders_preview` object.
+- **If you send an order batch with more than 10 recipients**, creating orders happens asynchronously in the background, and you'll see that `send_status` is `pending`. You can hit the [`/order_batches/:id`](/api-reference/order-batches/retrieve-an-order-batch) endpoint to check the `send_status` for `complete`, or listen for the `order_batch.completed` webhook.
+  - The `orders_preview` endpoint only contains the first 10 orders. If you have more orders, you can paginate through all the orders using the [`/order_batches/:id/orders`](/api-reference/order-batches/retrieve-orders-for-an-order-batch) endpoint.
+- **If you schedule an order batch for the future** using the `scheduled_send_on` parameter, the `send_status` will be `pending`, and `orders_preview` will be empty, until the scheduled send time, at which point the orders are created. Similarly to above, you can listen for the `order_batch.completed` webhook.
+
+You can check the `send_status` field to determine if your order batch is being asynchronously processed or is scheduled for the future (`send_status == pending`) or orders are ready (`send_status == complete`).
+
+### The `orders_preview` field
+
+The most important thing in the response is the order object. The `orders_preview` field displays the first 10 orders in your order batch. To determine the number of orders in the order batch, you can use the `orders_count` field.
+
+```json
+"orders_count": 1,
+"orders_preview": [
+  {
+    "id": "a74adf4b-1837-43f5-8e51-f74803cd8832",
+    "status": "created",
+    "recipient_first_name": "Alena",
+    "recipient_last_name": "Kenter",
+    "recipient_email": "alena@ongoody.com",
+    "individual_order_link": "https://gifts.ongoody.com/gift/gHBMKuXkiVgAFDyXx00h4XGs",
+    "card_id": "ff957080-192d-4032-b4c5-fbb057141c4b",
+    "message": "Thank you!",
+    "thank_you_note": null,
+    "view_count_recipient": 0,
+    "is_swapped": false,
+    "order_batch_id": "f0903768-609c-4851-bc9a-c17ea245e120",
+    "cart": { ... },
+    "shipments": [],
+    "amounts": {
+      "amount_product": 1000,
+      "amount_shipping": 1000,
+      "amount_processing_fee": 100,
+      "amount_pre_tax_total": 2100,
+      "amount_tax": null,
+      "amount_total": null,
+      "amount_global_relay_cost": null
+    },
+    "sender": {
+      "first_name": "Test",
+      "last_name": "User",
+      "email": "15557426864@test.ongoody.com"
+    },
+    "workspace_id": "b99bf758-104f-4570-a3a9-bc59e64646b1",
+    "workspace_name": "Test Team",
+    "original_cart": null,
+    "original_amounts": null,
+    "reference_id": "5NRQ9IKCVECOHFCUOZWJHTWW"
+  },
+]
+```
+
+If you always send single orders or fewer than 10 orders at once, great! You can use this array without having to make another request. But if you send more than 10 orders at once, you can also hit the [`/order_batches/:id/orders`](../../goody-api-openapi.json/paths/~1v1~1order_batches~1{id}~1orders) endpoint to paginate through the rest of your orders.
+
+In the order object, there are a few fields to point out:
+
+- `individual_gift_link` — This is the individual gift link for that recipient, which when opened goes directly to their gift. You can send this in an email or somewhere else so they can access their gift.
+- `status` — This status is for the individual order itself. The list of order statuses can be viewed on the [order lifecycle guide](/introduction/order-lifecycle). You can set up webhooks to get notified on changes to the status.
+- `amounts` — Contains the costs for this order, in cents.
+
+Congratulations – you've sent a gift!
+
+For more information on the order batch send endpoint, [visit the doc](/api-reference/~1v1~1order_batches).
+
+## Next steps
+
+Now that you've sent your gift, you can now open the gift link and accept the gift to see what the experience looks like.

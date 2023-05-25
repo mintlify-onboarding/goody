@@ -1,0 +1,33 @@
+---
+title: "Goody Commerce API"
+sidebarTitle: "Overview"
+description: "Sell physical products in your app without handling inventory, vendor partnerships, or logistics, and earn a revenue share on orders."
+---
+
+- **Access our product catalog** — We've built partnerships and revenue share agreements to carry brands like Brooklinen, Apple, MALIN+GOETZ, Levain Bakery, Bose, and more, so you don't have to. Access our product catalog with full product imagery and descriptions.
+- **Sell physical products in your app** – Display our full catalog or curate your own selection. Programmatically create orders through the Commerce API.
+- **Send gifts without an address** – Use our gifting flow to create a gift without an address. Generate a gift link that a recipient can use to accept their gift, swap for another gift, select personalized options like color or size, and more.
+- **Ship orders directly to an address** – If you know the address, we support that too. Just submit an API request – we handle the logistics and notify you when it's delivered.
+
+(Revenue share requires an agreement. Please contact our business development team before you go live.)
+
+## Payments
+
+The Commerce API is flexible on how to collect payments from end customers and how we pay the revenue share:
+
+| Method                                         | Description                                                                                                                                                                                                                                                                                                     |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Partner app collects payment**               | If you want to capture payment information or already have customer cards on file, you can process payments yourself. We set up a prefunded payment account for you on Goody. Once an order is placed with Goody, the transaction is paid for (with revshare credited) through the prefunded account.           |
+| **Partner app passes credit card information** | If you want to capture payment information or already have customer cards on file, but you want us to process the payment, you can send customer credit card details to our secure payment environment in Stripe. We will process the payment, and record revenue share and pay the revshare via bank transfer. |
+| **Goody captures credit card information**     | If you don't want to capture payment information, we can provide a secure Stripe payment form for end customers. We will process the payment, and record revenue share and pay the revshare via bank transfer.                                                                                                  |
+
+## Getting started
+
+In this guide, we'll walk through how to:
+
+1. Set up an account on our sandbox environment
+2. Obtain an API key
+3. Send a gift
+4. Set up webhooks for order events.
+
+Let's start with setting up an account and authentication.

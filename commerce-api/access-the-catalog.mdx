@@ -1,0 +1,88 @@
+---
+title: "Commerce API: Access the product catalog"
+sidebarTitle: "Access the catalog"
+---
+
+To access the product catalog, make a request (using your commerce API key) to:
+
+```
+GET https://api.sandbox.ongoody.com/v1/products
+Authorization: Bearer YOUR_GOODY_COMMERCE_API_KEY
+```
+
+This endpoint returns the products that are available to send through the Commerce API. The list of products can change as products are added and removed. The product object includes the brand name, price, brand shipping price, copy like subtitles, variant information, and product imagery.
+
+You can paginate the product catalog by passing the `?page=` query parameter (the first page is `1`) and the `?per_page` query parameter (maximum `100`) to paginate through the list.
+
+An example response might look like:
+
+```json
+{
+  "data": [
+    {
+      "id": "5821e50e-6a56-4144-bca2-3f41fbd699c0",
+      "name": "Dozen Cookies",
+      "brand": {
+        "id": "30e28df2-730e-4763-81bc-d528f0ac6a2a",
+        "name": "Cookie Company",
+        "shipping_price": 1000
+      },
+      "subtitle": null,
+      "subtitle_short": null,
+      "recipient_description": "",
+      "variants_label": "Flavor",
+      "variants_num_selectable": 1,
+      "variants": [
+        {
+          "id": "5eab976a-614c-41cf-a46f-8eca96748fbf",
+          "name": "Chocolate Chip",
+          "subtitle": "Classic chocolate chip.",
+          "image_large": {
+            "url": "https://assets.ongoody.com/image.png",
+            "width": 1000,
+            "height": 500
+          }
+        },
+        {
+          "id": "95592e6d-0bd3-49e9-ad2b-0112232e31d6",
+          "name": "Oatmeal",
+          "subtitle": "Delicious oatmeal.",
+          "image_large": {
+            "url": "https://assets.ongoody.com/image.png",
+            "width": 1000,
+            "height": 500
+          }
+        },
+        {
+          "id": "fe10b3ac-02b4-4b4e-b5cc-d16303fb1091",
+          "name": "Sugar",
+          "subtitle": "Tasty sugar.",
+          "image_large": {
+            "url": "https://assets.ongoody.com/image.png",
+            "width": 1000,
+            "height": 500
+          }
+        }
+      ],
+      "images": [
+        {
+          "id": "4fdc04a5-35e8-4789-84b9-c84259918f36",
+          "image_large": {
+            "url": "https://assets.ongoody.com/image.png",
+            "width": 1000,
+            "height": 500
+          }
+        }
+      ],
+      "price": 1000,
+      "price_is_variable": false,
+      "restricted_states": []
+    }
+  ],
+  "list_meta": {
+    "total_count": 1
+  }
+}
+```
+
+For more information, including the schema of the Product object, check out the [API reference for the products endpoint](/api-reference/products/list-all-active-products).
