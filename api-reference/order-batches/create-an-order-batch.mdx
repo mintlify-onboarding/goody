@@ -1,3 +1,15 @@
 ---
 openapi: "POST /v1/order_batches"
 ---
+
+For a guide on how to create an order batch, see the [Getting Started](introduction/getting-started) guide.
+
+### Order batches with 10 or fewer recipients
+
+Order batches with 10 or fewer recipients are created synchronously, and the returned `status` field will be `completed`. The orders and order links are available immediately inside the `orders_preview` field (which returns\nthe first 10 orders).
+
+## Order batches with more than 10 recipients
+
+Order batches with more than 10 recipients are created asynchronously, and\nthe order batch will have a `status` of `pending`. The orders and gift links won't be available until the order batch is finished processing synchronously. You can check the status of the order batch by calling\nthe `/order_batches/:id` endpoint, or by receiving a webhook notification on the `order_batch.completed` event.
+
+Once an order batch is created, you can access all of the orders by calling the `/order_batches/:id/orders` endpoint, where you can paginate through the list of orders. If your use case always sends 10 or fewer orders at a time, you can just use the `orders_preview` field on the order batch which gives you the first 10 orders.
