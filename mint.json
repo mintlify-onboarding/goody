@@ -105,7 +105,31 @@
         },
         {
           "group": "Schemas",
-          "pages": ["api-reference/schemas/error"]
+          "pages": [
+            "api-reference/schemas/error",
+            "api-reference/schemas/listmeta",
+            "api-reference/schemas/orderbatch",
+            "api-reference/schemas/order",
+            "api-reference/schemas/orderbatchrecipient",
+            "api-reference/schemas/cart",
+            "api-reference/schemas/cartitem",
+            "api-reference/schemas/orderbatchsendstatus",
+            "api-reference/schemas/orderstatus",
+            "api-reference/schemas/shipment",
+            "api-reference/schemas/product",
+            "api-reference/schemas/brand",
+            "api-reference/schemas/productimage",
+            "api-reference/schemas/productvariant",
+            "api-reference/schemas/image",
+            "api-reference/schemas/mailingaddress",
+            "api-reference/schemas/me",
+            "api-reference/schemas/sender",
+            "api-reference/schemas/orderbatchinput",
+            "api-reference/schemas/cartinput",
+            "api-reference/schemas/cartiteminput",
+            "api-reference/schemas/orderbatchsendmethod",
+            "api-reference/schemas/recipientinput"
+          ]
         }
       ]
     }
