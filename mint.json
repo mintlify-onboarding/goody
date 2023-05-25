@@ -60,6 +60,17 @@
         "automation-api/retrieve-order-status",
         "automation-api/webhooks"
       ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "automation-api/overview",
+        "automation-api/authentication",
+        "automation-api/access-the-catalog",
+        "automation-api/create-an-order",
+        "automation-api/retrieve-order-status",
+        "automation-api/webhooks"
+      ]
     }
   ],
   "footerSocials": {
