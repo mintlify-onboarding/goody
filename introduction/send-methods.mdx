@@ -1,0 +1,71 @@
+---
+title: "Send Methods"
+description: "When creating an order batch, there are several send methods that define the behavior of orders."
+---
+
+The send method (`email_and_link`, `link_multiple_custom_list`, or `direct_mail`) is passed as the `send_method` field on the create order batch payload.
+
+**Available send methods**
+
+<Card
+  title="Gift— Email Notification"
+  icon="inbox"
+  href="/introduction/send-methods#gift-email-notification"
+></Card>
+<Card
+  title="Gift— Links Only"
+  icon="link"
+  href="/introduction/send-methods#gift-links-only"
+></Card>
+<Card
+  title="Direct Mail"
+  icon="envelope"
+  href="/introduction/send-methods#direct-mail"
+></Card>
+
+## Gift – Email Notification
+
+Send method: `email_and_link`
+
+Orders will be created as gifts. An email notification (and text message, if phone is specified) will be sent to the recipient of the gift. You will also be able to retrieve the gift link from the `individual_gift_link` field on the `Order` object (hence "email and link"). An email must be specified for every recipient.
+
+Gift recipients can view their gift, swap for another gift (if swap is not disabled), and accept the gift by entering their address.
+
+## Gift - Links Only
+
+Send method: `link_multiple_custom_list`
+
+Orders will be created as gifts. No email notification will be sent to the gift recipient. On the `Order` object, there will be an `individual_gift_link` field which contains the link to the gift, which you can send to the recipient.
+
+Gift recipients can view their gift, swap for another gift (if swap is not disabled), and accept the gift by entering their address.
+
+## Direct Mail
+
+<Note>
+  **Direct mail is limited to approved partners**. Contact us if you want to use
+  direct mail for your integration.
+</Note>
+
+Send method: `direct_mail`
+
+Ship products directly to the given address. The address must be specified in the `mailing_address` field of the recipient payload, like the example below:
+
+```json
+"recipients": [
+  {
+    "first_name": "Alena",
+    "last_name": "Kenter",
+    "email": "alena@ongoody.com",
+    "mailing_address": {
+      "first_name": "Alena",
+      "last_name": "Kenter",
+      "address_1": "1 Main St",
+      "address_2": "Apt 123",
+      "city": "New York",
+      "state": "NY",
+      "postal_code": "10022",
+      "country": "US"
+    }
+  }
+]
+```

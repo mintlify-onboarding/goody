@@ -1,13 +1,62 @@
 ---
 title: "Goody API"
+sidebarTitle: "Overview"
 description: "Goody's API lets you send physical products and gifts programmatically."
 ---
 
 <CardGroup cols={2}>
   <Card title="Send gifts without an address" icon="gift" icontype="duotone">
-    You can generate a gift link where they can view your gift, have the option of swapping it for something else, and enter their address themselves
+    You can generate a gift link where they can view your gift, have the option
+    of swapping it for something else, and enter their address themselves
   </Card>
-  <Card title="Ship physical products to an address" icon="truck-fast" icontype="duotone">
-    If you already have an address, Goody can ship products and handle all the logistics.
+  <Card
+    title="Ship physical products to an address"
+    icon="truck-fast"
+    icontype="duotone"
+  >
+    If you already have an address, Goody can ship products and handle all the
+    logistics.
   </Card>
 </CardGroup>
+
+Goody provides two APIs depending on your use case:
+
+<Card
+  title="Automation API — for Goody customers"
+  icon="wand-sparkles"
+  href="https://ongoody.stoplight.io/docs/goody-api/jwp96a46nefuq-goody-automation-api"
+  icontype="duotone"
+>
+  Automate your own gifting and sending. Create custom integrations to send one
+  or hundreds of gifts programmatically. Or use our Zapier app for no-code
+  workflows.
+</Card>
+<Card
+  title="Commerce API — to add commerce to your app"
+  icon="truck-ramp-couch"
+  href="https://ongoody.stoplight.io/docs/goody-api/dmkumih2k2evz-goody-commerce-api"
+  icontype="duotone"
+>
+  Sell physical products in your app without handling inventory, partnerships,
+  or logistics. Access our product catalog, gift without an address, and earn a
+  revenue share.
+</Card>
+
+## Production and sandbox environments
+
+Goody's API has two environments:
+
+- **Production**: https://api.ongoody.com
+- **Sandbox**: https://sandbox.api.ongoody.com
+
+## Start using the API
+
+To start using the API, sign up for a Goody for Business account at https://www.ongoody.com/business. It's free to sign up.
+
+To obtain an API key for the Automation API, go to your Account page and click [API Keys](https://www.ongoody.com/plus/account/api-keys). To send gifts in production, you'll need to add a payment method, which you can do on that page. To obtain an API key for the Commerce API, refer to the [getting started guide](commerce-api/overview).
+
+## Using the Sandbox environments
+
+You can use the Sandbox environment to send test gifts without being charged for them. Your sandbox account is entirely separate account from production, so you can do your testing without affecting your main account.
+
+Visit https://sandbox.ongoody.com/business to sign up for a sandbox account, and to obtain an API key for the Automation API, go to your Account page and click API Keys. To obtain an [API key](https://www.ongoody.com/plus/account/api-keys) for the Commerce API, refer to the [getting started guide](commerce-api/overview).

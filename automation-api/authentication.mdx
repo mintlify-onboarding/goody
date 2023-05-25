@@ -1,0 +1,59 @@
+---
+title: "Automation API: Authentication"
+sidebarTitle: "Authentication"
+description: "Production and Sandbox accounts are separate, and you have different API keys for each environment for isolation."
+---
+
+## Create a Goody for Business account
+
+To sign up for a Goody for Business account in production or sandbox, go to the corresponding link:
+
+| Environment    | API Keys Link                               |
+| -------------- | ------------------------------------------- |
+| **Production** | https://www.ongoody.com/business/signup     |
+| **Sandbox**    | https://sandbox.ongoody.com/business/signup |
+
+## Create an API Keys
+
+Once you're signed up, to create an API key, go to the top-right account menu, and click **Account**, and then click the **API Keys** sub-menu. Or, use the links below.
+
+| Environment    | API Keys Link                                     |
+| -------------- | ------------------------------------------------- |
+| **Production** | https://www.ongoody.com/plus/account/api-keys     |
+| **Sandbox**    | https://sandbox.ongoody.com/plus/account/api-keys |
+
+## Base URL
+
+The base URL of the API depends on the environment you're using:
+
+| Environment    | API Keys Link                   |
+| -------------- | ------------------------------- |
+| **Production** | https://api.ongoody.com         |
+| **Sandbox**    | https://api.sandbox.ongoody.com |
+
+## Authentication header
+
+This API uses bearer authentication. Send your API key in the `Authorization` HTTP header preceded by `Bearer` :
+
+```
+Authorization: Bearer YOUR_GOODY_API_KEY
+```
+
+API keys are scoped to users, and any orders created with your API key show up in your Goody for Business account like orders created from the website. You can track them on the Track page.
+
+## Calling `/me`
+
+To check that you're authenticated, you can send a request to the `/me` endpoint:
+
+```
+POST https://api.sandbox.ongoody.com/v1/me
+Authorization: Bearer YOUR_GOODY_API_KEY
+```
+
+And it should respond with:
+
+```json
+{
+  "email": "example-email@ongoody.com"
+}
+```

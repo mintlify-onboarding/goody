@@ -1,57 +1,70 @@
 {
-    "name": "Goody",
-    "logo": {
-      "light": "/logo.png",
-      "dark": "/logo.png"
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Goody",
+  "logo": {
+    "light": "/logo.png",
+    "dark": "/logo.png"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#9159D6",
+    "light": "#B584F1",
+    "dark": "#9159D6",
+    "anchors": {
+      "from": "#ac72ff",
+      "to": "#7f67ff"
+    }
+  },
+  "topbarCtaButton": {
+    "name": "Send a Gift",
+    "url": "https://www.ongoody.com/send"
+  },
+  "topbarLinks": [
+    {
+      "name": "Sign in",
+      "url": "https://www.ongoody.com/"
     },
-    "favicon": "/favicon.png",
-    "colors": {
-      "primary": "#9159D6",
-      "light": "#B584F1",
-      "dark": "#9159D6",
-      "anchors": {
-        "from": "#ac72ff",
-        "to": "##7f67ff"
-      }
+    {
+      "name": "Goody for Business",
+      "url": "https://www.ongoody.com/business"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "API Reference",
+      "icon": "square-terminal",
+      "url": "api-reference"
     },
-    "topbarCtaButton": {
-      "name": "Send a Gift",
-      "url": "https://www.ongoody.com/send"
+    {
+      "name": "Blog",
+      "icon": "blog",
+      "url": "https://www.ongoody.com/blog"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Introduction",
+      "pages": [
+        "introduction/overview",
+        "introduction/order-lifecycle",
+        "introduction/send-methods"
+      ]
     },
-    "topbarLinks": [
-      {
-        "name": "Sign in",
-        "url": "https://www.ongoody.com/"
-      },
-      {
-        "name": "Goody for Business",
-        "url": "https://www.ongoody.com/business"
-      }
-    ],
-    "anchors": [
-      {
-        "name": "API Reference",
-        "icon": "square-terminal",
-        "url": "api-reference"
-      },
-      {
-        "name": "Blog",
-        "icon": "blog",
-        "url": "https://www.ongoody.com/blog"
-      }
-    ],
-    "navigation": [
-      {
-        "group": "Introduction",
-        "pages": [
-            "introduction/overview"
-        ]
-      }
-    ],
-    "footerSocials":
-      {
-          "twitter": "https://twitter.com/goodygifting",
-          "linkedin": "https://www.linkedin.com/company/ongoody",
-          "instagram": "https://instagram.com/ongoody"
-      }
+    {
+      "group": "Automation API",
+      "pages": [
+        "automation-api/overview",
+        "automation-api/authentication",
+        "automation-api/access-the-catalog",
+        "automation-api/create-an-order",
+        "automation-api/retrieve-order-status",
+        "automation-api/webhooks"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/goodygifting",
+    "linkedin": "https://www.linkedin.com/company/ongoody",
+    "instagram": "https://instagram.com/ongoody"
   }
+}

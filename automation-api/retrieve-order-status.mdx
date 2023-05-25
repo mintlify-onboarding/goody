@@ -1,0 +1,22 @@
+---
+title: "Automation API: Retrieve order status"
+sidebarTitle: "Retrieve order status"
+---
+
+## Get order
+
+In most cases, you'll want to get information about an individual order. You can retrieve an order by calling the GET /orders/:id endpoint.
+
+This will return all information about the order, in particular its status, such as notified, opened, shipped, delivered, etc. For more information on all of the available order statuses, visit the Order Lifecycle documentation page.
+
+For more information about the other fields in the Order object, refer to the Order schema.
+
+## Cancel order
+
+To cancel an order in created, notified, or opened status, call the POST /orders/:id/cancel endpoint. For gifts that are in the accepted state or later, they are already processing; please contact Goody Support for these orders.
+
+## Get order batch
+
+You can retrieve an order batch by calling the GET /order_batches/:id endpoint, or retrieve orders inside the order batch using the GET /orders/:id/orders endpoint.
+
+For more information about the other fields in the OrderBatch object, refer to the OrderBatch schema.
