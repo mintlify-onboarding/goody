@@ -294,6 +294,31 @@ description: "Emitted when a order batch is created in the organization."
         </ResponseField>
         <ResponseField name="shipments" type="array[object]" required>
           A list of the shipments for the order.
+          <Expandable title="properties">
+           <ResponseField name="id" type="string<uuid>" required>
+           </ResponseField>
+           <ResponseField name="status" type="string" required>
+            Allowed values: `pending` `tracking` `shipped` `delivered` `delivered_override` `failed` `failed_unset_tracking` `failed_with_reship`
+           </ResponseField>
+           <ResponseField name="brand_name" type="string" required>
+            The name of the brand that this shipment is from
+           </ResponseField>
+           <ResponseField name="tracking_carrier" type="string">
+            The carrier for this shipment, e.g. UPS.
+           </ResponseField>
+           <ResponseField name="tracking_number" type="string">
+            Only for approved distribution partners.
+           </ResponseField>
+           <ResponseField name="shipped_at" type="string<date-time>">
+            ISO 8601
+           </ResponseField>
+           <ResponseField name="delivered_at" type="string<date-time>">
+            ISO 8601
+           </ResponseField>
+           <ResponseField name="delivery_eta" type="string<date-time>">
+            The estimated delivery time of this shipment.
+           </ResponseField>
+          </Expandable>
         </ResponseField>
         <ResponseField name="workspace_id" type="string<uuid>">
           Organizations are sub-divided into workspaces. Orders are contained in workspaces, identified by this ID.
