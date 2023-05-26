@@ -1,0 +1,53 @@
+---
+title: "Webhooks"
+sidebarTitle: "Webhook setup"
+description: "Webhooks allow you to be notified when events happen on Goody orders and order batches. You can subscribe to all webhooks, or a subset of them. Webhooks are sent by the Svix platform."
+---
+
+For the complete guide to webhooks, visit the Webhooks page for the API you are using:
+
+<Card
+  title="Automation API"
+  icon="wand-sparkles"
+  href="/automation-api/overview"
+  icontype="duotone"
+></Card>
+<Card
+  title="Commerce API"
+  icon="truck-ramp-couch"
+  href="/commerce-api/overview"
+  icontype="duotone"
+></Card>
+
+## Available webhooks
+
+| Webhook                                                                              | Description                                                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| **[order_batch.created](/webooks/webhooks-types/order_batch.created)**               | When an order batch is newly created. The order batch could still be in process of sending, or scheduled for the future. |
+| **[order_batch.completed](/webooks/webhooks-types/order_batch.completed)**           | When an order batch is fully processed and all orders have been created.                                                 |
+| **[order.created](/webooks/webhooks-types/order.created)**                           | When an order is created and is ready to be opened.                                                                      |
+| **[order.gift_opened](/webooks/webhooks-types/order.gift_opened)**                   | When a gift is opened by the recipient.                                                                                  |
+| **[order.gift_accepted](/webooks/webhooks-types/order.gift_accepted)**               | When a gift has been accepted by the recipient.                                                                          |
+| **[order.thank_you_note_added](/webooks/webhooks-types/order.thank_you_note_added)** | When a recipient adds a thank you note to a order after accepting it.                                                    |
+| **[order.shipped](/webooks/webhooks-types/order.shipped)**                           | When an order starts shipping. If there are multiple shipments, this is called for the first.                            |
+| **[order.delivered](/webooks/webhooks-types/order.delivered)**                       | When an order is fully delivered. If there are multiple shipments, this is called when all shipments are delivered.      |
+
+## Setting up a new webhook
+
+![](/images/new-webhooks.png)
+
+Enter a URL to recieve webhooks in the **Endpoint URL** section.
+
+You can leave **Message Filtering** blank to receive all events, or select specific events to receive.
+
+## Webhook security
+
+To ensure the integrity of the webhooks you receive, we recommend verifying the signatures of the webhooks you receive. Svix provides packages for multiple languages that make verifying signatures easy.
+
+To see how, go to the [Webhook Security](/webhooks/webhook-security) page.
+
+## Logs
+
+You can view the logs for webhook delivery for each endpoint, and re-send any failed webhooks if needed.
+
+![webhook-logs.png](/images/logs.png)
