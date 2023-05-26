@@ -164,8 +164,8 @@ The response looks like:
 ```
 
 - **If you send an order batch with 10 or fewer recipients**, orders are processed right away, and you'll see that that `send_status` is `complete` and you'll receive the list of orders back in the `orders_preview` object.
-- **If you send an order batch with more than 10 recipients**, creating orders happens asynchronously in the background, and you'll see that `send_status` is `pending`. You can hit the `/order_batches/:id` endpoint to check the `send_status` for complete, or listen for the `order_batch.completed` webhook.
-  - The `orders_preview` endpoint only contains the first 10 orders. If you have more orders, you can paginate through all the orders using the `/order_batches/:id/orders` endpoint.
+- **If you send an order batch with more than 10 recipients**, creating orders happens asynchronously in the background, and you'll see that `send_status` is `pending`. You can hit the [`/order_batches/:id`](/api-reference/order-batches/retrieve-an-order-batch) endpoint to check the `send_status` for complete, or listen for the `order_batch.completed` webhook.
+  - The `orders_preview` endpoint only contains the first 10 orders. If you have more orders, you can paginate through all the orders using the [`/order_batches/:id/orders`](/api-reference/order-batches/retrieve-orders-for-an-order-batch) endpoint.
 - **If you schedule an order batch for the future** using the `scheduled_send_on` parameter, the `send_status` will be `pending`, and `orders_preview` will be empty, until the scheduled send time, at which point the orders are created. Similarly to above, you can listen for the `order_batch.completed` webhook.
 
 You can check the send_status field to determine if your order batch is being asynchronously processed or is scheduled for the future (`send_status == pending`) or orders are ready (`send_status == complete`).
