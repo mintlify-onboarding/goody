@@ -180,7 +180,6 @@ description: "Emitted when a order batch is created in the organization."
 <ParamField query="event_id" type="string" required>
   The unique ID for this event
 </ParamField>
-
 <ResponseField name="data" type="object">
   An order batch is the primary resource created by the API. Order batches
   contain an array of orders.
@@ -409,7 +408,7 @@ description: "Emitted when a order batch is created in the organization."
           <Expandable title="properties">
             <ResponseField name="id" type="string<uuid>">
             </ResponseField>
-            <ResponseField name="item" type="array[object]">
+            <ResponseField name="items" type="array[object]">
               <Expandable title="properties">
                 <ResponseField name="id" type="string<uuid>" required>
                 </ResponseField>
