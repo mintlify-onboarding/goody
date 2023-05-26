@@ -180,41 +180,204 @@ description: "Emitted when a order batch is created in the organization."
 <ParamField query="event_id" type="string" required>
   The unique ID for this event
 </ParamField>
-<ParamField query="data" type="object" required>
+
+<ResponseField name="data" type="object">
   An order batch is the primary resource created by the API. Order batches
   contain an array of orders.
-</ParamField>
-<Accordion title="Show Properties">
-  <ParamField query="id" type="string<uuid>" required>
-    An order batch is the primary resource created by the API. Order batches
-    contain an array of orders.
-  </ParamField>
-  <ParamField query="send_status" type="string" required>
-    The `pending` status indicates that an order batch is being prepared to be
-    sent out. If it is not scheduled, it is being sent asynchronously. If it is
-    scheduled, it will stay in `pending` state until the scheduled time is
-    reached, at which point it will be processed and moved to `complete`. When
-    it is in `pending` status, no orders are created yet.\\n\\nWhen the order
-    batch is in `complete` status, all orders are created and available.
-  </ParamField>
-  <ParamField query="from_name" type="string" required>
-    The name of the sender. This is displayed on the order and notifications.
-  </ParamField>
-  <ParamField query="message" type="string">
-    The message in this order batch, provided by the sender.
-  </ParamField>
-  <ParamField query="orders_count" type="integer" required>
-    The total number of orders in this order batch. This might be blank if the
-    order batch is scheduled for the future, or it could be fewer than the
-    recipient count if the order batch is in the process of being sent.
-  </ParamField>
-  <ParamField query="orders_preview" type="array[object]" required>
-    A preview of the first 10 orders in this order batch. To paginate through
-    all of the orders, use the `/order_batches/:id/orders` endpoint with
-    `?page&per_page`. If your use case never sends more than 10 orders in a
-    single batch, you can use this field instead of calling
-    `/order_batches/:id/orders`. For order batches with more than 10 recipients,
-    this array will be empty while the orders are asynchronously created in the
-    background.
-  </ParamField>
-</Accordion>
+  <Expandable title="properties">
+    <ResponseField name="id" type="string<uuid>" required>
+      An order batch is the primary resource created by the API. Order batches
+      contain an array of orders.
+    </ResponseField>
+    <ResponseField name="send_status" type="string" required>
+      The `pending` status indicates that an order batch is being prepared to be
+      sent out. If it is not scheduled, it is being sent asynchronously. If it
+      is scheduled, it will stay in `pending` state until the scheduled time is
+      reached, at which point it will be processed and moved to `complete`. When
+      it is in `pending` status, no orders are created yet.\\n\\nWhen the order
+      batch is in `complete` status, all orders are created and available.
+    </ResponseField>
+    <ResponseField name="from_name" type="string" required>
+      The name of the sender. This is displayed on the order and notifications.
+    </ResponseField>
+    <ResponseField name="message" type="string">
+      The message in this order batch, provided by the sender.
+    </ResponseField>
+    <ResponseField name="orders_count" type="integer" required>
+      The total number of orders in this order batch. This might be blank if the
+      order batch is scheduled for the future, or it could be fewer than the
+      recipient count if the order batch is in the process of being sent.
+    </ResponseField>
+    <ResponseField name="orders_preview" type="array[object]" required>
+      A preview of the first 10 orders in this order batch. To paginate through
+      all of the orders, use the `/order_batches/:id/orders` endpoint with
+      `?page&per_page`. If your use case never sends more than 10 orders in a
+      single batch, you can use this field instead of calling
+      `/order_batches/:id/orders`. For order batches with more than 10
+      recipients, this array will be empty while the orders are asynchronously
+      created in the background.
+      <Expandable title="properties">
+        <ResponseField name="id" type="string<uuid>" required></ResponseField>
+        <ResponseField
+          name="recipient_first_name"
+          type="string"
+          required
+        ></ResponseField>
+        <ResponseField name="recipient_last_name" type="string"></ResponseField>
+        <ResponseField name="recipient_email" type="string"></ResponseField>
+        <ResponseField name="status" type="string" required>
+          Allowed values: `created` `notified` `opened` `accepted`
+          `pending_payment` `paid` `ordered` `shipped` `delivered` `failed`
+          `canceled`
+        </ResponseField>
+        <ResponseField name="individual_gift_link" type="string" required>
+          This gift link can be sent to the recipient or shared with the sender.
+          For privacy reasons, this gift link does not display tracking
+          information. A separate link, the recipient link, is sent directly to
+          the recipient after they accept their gift, which does contain
+          tracking information.
+        </ResponseField>
+        <ResponseField name="cart" type="object" required>
+          The cart currently on this order. If the order is a gift that was
+          swapped, `cart` displays the most recent products selected (i.e.
+          post-swap).
+          <Expandable title="properties">
+            <ResponseField
+              name="id"
+              type="string<uuid>"
+              required
+            ></ResponseField>
+            <ResponseField name="items" type="array[object]">
+              <Expandable title="properties">
+                <ResponseField
+                  name="id"
+                  type="string<uuid>"
+                  required
+                ></ResponseField>
+                <ResponseField name="product" type="object" required>
+                  <Expandable title="properties">
+                    <ResponseField
+                      name="id"
+                      type="string<uuid>"
+                      required
+                    ></ResponseField>
+                    <ResponseField
+                      name="name"
+                      type="string"
+                      required
+                    ></ResponseField>
+                    <ResponseField name="brand" type="object" required>
+                      The brand that this product is from.
+                      <Expandable title="properties">
+                        <ResponseField
+                          name="id"
+                          type="string<uuid>"
+                          required
+                        ></ResponseField>
+                        <ResponseField
+                          name="name"
+                          type="string"
+                          required
+                        ></ResponseField>
+                      </Expandable>
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField
+                  name="quantity"
+                  type="integer"
+                  required
+                ></ResponseField>
+              </Expandable>
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+        <ResponseField name="shipments" type="array[object]" required>
+          A list of the shipments for the order.
+        </ResponseField>
+        <ResponseField name="workspace_id" type="string<uuid>">
+          Organizations are sub-divided into workspaces. Orders are contained in workspaces, identified by this ID.
+        </ResponseField>
+        <ResponseField name="workspace_name" type="string">
+        </ResponseField>
+        <ResponseField name="expires_at" type="string<date-time>">
+          For gifts, the date and time the gift is set to expire.
+        </ResponseField>
+        <ResponseField name="card_id" type="string">
+          The digital greeting card on this gift.
+        </ResponseField>
+        <ResponseField name="message" type="string">
+          The message in this gift, provided by the sender.
+        </ResponseField>
+        <ResponseField name="thank_you_note" type="string">
+          A thank you note sent by the recipient.
+        </ResponseField>
+        <ResponseField name="view_count_recipient" type="integer">
+          The number of times the recipient viewed the gift.
+        </ResponseField>
+        <ResponseField name="is_swapped" type="boolean">
+          If this gift was swapped by the recipient. Swapping allows a recipient to select another product or products, which replaces the `cart`. The original products are saved to `original_cart`.
+        </ResponseField>
+        <ResponseField name="order_batch_id" type="string<uuid>">
+          On Goody for Business, all orders are attached to a order batch, which is a collection of one or more orders.
+        </ResponseField>
+        <ResponseField name="amounts" type="object" required>
+          Costs in USD cents (i.e. $1.00 = 100). If the order was swapped, `amounts` displays the most recent amounts (i.e. post-swap).
+        </ResponseField>
+        <ResponseField name="event_times" type="object">
+          Only provided when calling the /orders/:id endpoint.
+        </ResponseField>
+        <ResponseField name="original_cart" type="object">
+          If this order is a gift that was swapped, this displays the original cart that was sent to the recipient.
+        </ResponseField>
+        <ResponseField name="original_amounts" type="object">
+          If this order is a gift that was swapped, this displays the original amounts of the cart that was sent to the recipient.
+        </ResponseField>
+        <ResponseField name="sender" type="object" required>
+          The Goody user who sent this order.
+        </ResponseField>
+        <ResponseField name="reference_id" type="string" required>
+          The reference ID displayed on receipts and other locations as the ID for this order.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="recipients_count" type="integer" required>
+      The total number of recipients in this order batch.
+    </ResponseField>
+    <ResponseField name="recipients_preview" type="integer" required>
+      A preview of the first 10 recipients in this order batch. To see all of the recipients, use `/order_batches/:id/recipients`. Recipients contain the original contact information provided for each recipient when the order batch was created.
+    </ResponseField>
+    <ResponseField name="cart" type="object" required>
+      The cart that was sent for this order batch. This is the original cart that was created for this order batch. If individual orders were swapped, this still remains the same, whereas orders' `cart` would change if they were swapped.
+    </ResponseField>
+    <ResponseField name="is_scheduled_send" type="boolean">
+      Whether this order batch was set up as a scheduled send. This stays as `true` after the scheduled send is complete. To determine if the order batch is scheduled to be sent for the future, check if `status` is `pending` and `scheduled_send_on` is in the future. When a order batch is scheduled, orders are only created on the scheduled send date.
+    </ResponseField>
+    <ResponseField name="scheduled_send_on" type="string<date-time>">
+      The date and time the order batch is scheduled to be sent. This will be `null` if the order batch is not a scheduled send. This field remains after the scheduled send completes. ISO 8601, UTC.
+    </ResponseField>
+    <ResponseField name="expires_at" type="string<date-time>">
+      The date and time the order batch is set to expire. ISO 8601, UTC.
+    </ResponseField>
+    <ResponseField name="send_method" type="string">
+      The method for sending a order batch. Currently, the only supported send method is `link_multiple_custom_list` which specifies that a link should be created for each order, but no email should automatically be sent to the recipient. Allowed value: `link_multiple_custom_list`
+    </ResponseField>
+    <ResponseField name="batch_name" type="string">
+      An internal name for the order batch, falling back to an auto-generated batch name. Not displayed to recipients.
+    </ResponseField>
+    <ResponseField name="card_id" type="string<uuid>">
+      The digital greeting card on this order batch.
+    </ResponseField>
+    <ResponseField name="sender" type="object" required>
+      The sender of the order batch.
+    </ResponseField>
+    <ResponseField name="workplace_id" type="string<uuid>">
+      Organizations are sub-divided into workspaces. Order batches are contained in workspaces, identified by this ID.
+    </ResponseField>
+    <ResponseField name="workplace_name" type="string">
+    </ResponseField>
+    <ResponseField name="reference_id" type="string" required>
+      The reference ID displayed on receipts and other locations as the ID for this order batch.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
