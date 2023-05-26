@@ -348,18 +348,117 @@ description: "Emitted when a order batch is created in the organization."
         </ResponseField>
         <ResponseField name="amounts" type="object" required>
           Costs in USD cents (i.e. $1.00 = 100). If the order was swapped, `amounts` displays the most recent amounts (i.e. post-swap).
+          <Expandable title="properties">
+            <ResponseField name="amount_product" type="integer" required>
+              Total cost of the products in this order.
+            </ResponseField>
+            <ResponseField name="amount_shipping" type="integer" required>
+              Total cost of shipping for this order.
+            </ResponseField>
+            <ResponseField name="amount_processing_fee" type="integer">
+              Total cost of processing fees for this order.
+            </ResponseField>
+            <ResponseField name="amount_credit_applied" type="integer">
+              Total amount of credit applied to this order.
+            </ResponseField>
+            <ResponseField name="amount_pre_tax_total" type="integer" required>
+              Total cost of the products, shipping, and processing fees in this order.
+            </ResponseField>
+            <ResponseField name="amount_tax" type="integer">
+              Total tax for this order.
+            </ResponseField>
+            <ResponseField name="amount_total" type="integer">
+              Total cost of the products, shipping, processing fees, tax, and global shipping costs in this order.
+            </ResponseField>
+            <ResponseField name="amount_global_relay_cost" type="integer">
+              Total cost of global shipping for this order through the Global Relay service.
+            </ResponseField>
+          </Expandable>
         </ResponseField>
         <ResponseField name="event_times" type="object">
           Only provided when calling the /orders/:id endpoint.
+          <Expandable title="properties">
+            <ResponseField name="created_at" type="string<date-time>" required>
+              ISO 8601
+            </ResponseField>
+            <ResponseField name="notified_at" type="string<date-time>">
+              When the recipient was notified of the order.
+            </ResponseField>
+            <ResponseField name="opened_at" type="string<date-time>">
+              For gifts, when the recipient opened the order.
+            </ResponseField>
+            <ResponseField name="accepted_at" type="string<date-time>">
+              For gifts, when the recipient accepted the order.
+            </ResponseField>
+            <ResponseField name="pending_payment_at" type="string<date-time>" required>
+              When the order entered pending payment status.
+            </ResponseField>
+            <ResponseField name="paid_at" type="string<date-time>">
+              When the order was paid for.
+            </ResponseField>
+            <ResponseField name="shipped_at" type="string<date-time>">
+              When the order was first shipped. If there are multiple shipments, this is when the first shipment shipped.
+            </ResponseField>
+            <ResponseField name="delivered_at" type="string<date-time>">
+              When the order was delivered. If there are multiple shipments, this is when all shipments were delivered.
+            </ResponseField>
+          </Expandable>
         </ResponseField>
         <ResponseField name="original_cart" type="object">
           If this order is a gift that was swapped, this displays the original cart that was sent to the recipient.
+          <Expandable title="properties">
+            <ResponseField name="id" type="string<uuid>">
+            </ResponseField>
+            <ResponseField name="item" type="array[object]">
+              <Expandable title="properties">
+                <ResponseField name="id" type="string<uuid>" required>
+                </ResponseField>
+                <ResponseField name="product" type="object" required>
+                  <Expandable title="properties">
+                    <ResponseField name="id" type="string<uuid>" required>
+                    </ResponseField>
+                    <ResponseField name="name" type="string" required>
+                    </ResponseField>
+                    <ResponseField name="brand" type="object" required>
+                      The brand that this product is from.
+                      <Expandable title="properties">
+                        <ResponseField name="id" type="string<uuid>" required>
+                        </ResponseField>
+                        <ResponseField name="name" type="string" required>
+                        </ResponseField>
+                      </Expandable>
+                    </ResponseField>
+                  </Expandable>
+                </ResponseField>
+                <ResponseField name="quantity" type="integer" required>
+                </ResponseField>
+              </Expandable>
+            </ResponseField>
+          </Expandable>
         </ResponseField>
         <ResponseField name="original_amounts" type="object">
           If this order is a gift that was swapped, this displays the original amounts of the cart that was sent to the recipient.
+          <Expandable title="properties">
+            <ResponseField name="original_amount_product" type="integer">
+            </ResponseField>
+            <ResponseField name="original_amount_shipping" type="integer">
+            </ResponseField>
+            <ResponseField name="original_amount_credit_applied" type="integer">
+            </ResponseField>
+            <ResponseField name="original_amount_pre_tax_total" type="integer">
+            </ResponseField>
+          </Expandable>
         </ResponseField>
         <ResponseField name="sender" type="object" required>
           The Goody user who sent this order.
+          <Expandable title="properties">
+            <ResponseField name="first_name" type="string" required>
+            </ResponseField>
+            <ResponseField name="last_name" type="string" required>
+            </ResponseField>
+            <ResponseField name="email" type="string" required>
+            </ResponseField>
+          </Expandable>
         </ResponseField>
         <ResponseField name="reference_id" type="string" required>
           The reference ID displayed on receipts and other locations as the ID for this order.
@@ -371,9 +470,39 @@ description: "Emitted when a order batch is created in the organization."
     </ResponseField>
     <ResponseField name="recipients_preview" type="integer" required>
       A preview of the first 10 recipients in this order batch. To see all of the recipients, use `/order_batches/:id/recipients`. Recipients contain the original contact information provided for each recipient when the order batch was created.
+      <Expandable title="properties">
+        <ResponseField name="first_name" type="string" required>
+        </ResponseField>
+        <ResponseField name="last_name" type="string">
+        </ResponseField>
+        <ResponseField name="email" type="string">
+        </ResponseField>
+      </Expandable>
     </ResponseField>
     <ResponseField name="cart" type="object" required>
       The cart that was sent for this order batch. This is the original cart that was created for this order batch. If individual orders were swapped, this still remains the same, whereas orders' `cart` would change if they were swapped.
+      <Expandable title="properties">
+        <ResponseField name="id" type="string<uuid>" required>
+        </ResponseField>
+        <ResponseField name="product" type="object" required>
+          <Expandable title="properties">
+            <ResponseField name="id" type="string<uuid>" required>
+            </ResponseField>
+            <ResponseField name="name" type="string" required>
+            </ResponseField>
+            <ResponseField name="brand" type="object" required>
+              <Expandable title="properties">
+                <ResponseField name="id" type="string<uuid>" required>
+                </ResponseField>
+                <ResponseField name="name" type="string" required>
+                </ResponseField>
+              </Expandable>
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+        <ResponseField name="quantity" type="integer" required>
+        </ResponseField>
+      </Expandable>
     </ResponseField>
     <ResponseField name="is_scheduled_send" type="boolean">
       Whether this order batch was set up as a scheduled send. This stays as `true` after the scheduled send is complete. To determine if the order batch is scheduled to be sent for the future, check if `status` is `pending` and `scheduled_send_on` is in the future. When a order batch is scheduled, orders are only created on the scheduled send date.
@@ -395,6 +524,14 @@ description: "Emitted when a order batch is created in the organization."
     </ResponseField>
     <ResponseField name="sender" type="object" required>
       The sender of the order batch.
+      <Expandable title="properties">
+        <ResponseField name="first_name" type="string" required>
+        </ResponseField>
+        <ResponseField name="last_name" type="string" required>
+        </ResponseField>
+        <ResponseField name="email" type="string" required>
+        </ResponseField>
+      </Expandable>
     </ResponseField>
     <ResponseField name="workplace_id" type="string<uuid>">
       Organizations are sub-divided into workspaces. Order batches are contained in workspaces, identified by this ID.
