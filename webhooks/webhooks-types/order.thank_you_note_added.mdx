@@ -1,29 +1,25 @@
 ---
-stoplight-id: cj7v6m6qdxpc0
+title: "Event: order.thank_you_note_added"
+sidebarTitle: "order.thank_you_note_added"
+description: "Emitted when the recipient adds a thank you note to a gift. This typically happens shortly after the gift has been accepted, but can happen anytime after acceptance. You can access the thank you note on the `thank_you_note` property of the order."
 ---
-
-# Event: order.shipped
-
-Emitted when the order is shipped. If there are multiple shipments, this is emitted when the first shipment for this order is in transit.
-
-You can access the list of shipments under the `shipments` field. Note that for multi-shipment orders, when this order first enters the shipped state, the list of shipments might be incomplete since more shipments might be shipped later.
 
 ## Example
 
 ```json
 {
-  "event_type": "order.shipped",
+  "event_type": "order.thank_you_note_added",
   "id": "ad097c47-bf12-45c9-8feb-0536a0012c09",
   "data": {
     "id": "10c588dd-d566-45bf-86e9-c23bd1f1587b",
-    "status": "shipped",
+    "status": "accepted",
     "individual_gift_link": "https://gifts.ongoody.com/gift/vWtUe8lQRJuoyYzKlYeHMkbV",
     "recipient_first_name": "Alena",
     "recipient_last_name": "Kenter",
     "recipient_email": "alena@ongoody.com",
     "card_id": "ae4cb4ce-75fc-4782-a9ab-2f30d9b7b41d",
     "message": "Thank you!",
-    "thank_you_note": null,
+    "thank_you_note": "Thanks for the gift!",
     "view_count_recipient": 0,
     "is_swapped": false,
     "order_batch_id": "4133078a-c35f-441e-8e92-57645342b299",
@@ -45,17 +41,7 @@ You can access the list of shipments under the `shipments` field. Note that for 
         }
       ]
     },
-    "shipments": [
-      {
-        "id": "9a1a2003-bb03-4409-b7fd-243b2e600e46",
-        "status": "shipped",
-        "brand_name": "Cookie Company",
-        "tracking_carrier": "UPS",
-        "shipped_at": "2023-01-23T00:00:00Z",
-        "delivered_at": null,
-        "delivery_eta": "2023-01-26T00:00:00Z"
-      }
-    ],
+    "shipments": [],
     "amounts": {
       "amount_product": 1000,
       "amount_shipping": 1000,
@@ -176,27 +162,16 @@ You can access the list of shipments under the `shipments` field. Note that for 
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id",
-                          "name"
-                        ]
+                        "required": ["id", "name"]
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "brand"
-                    ]
+                    "required": ["id", "name", "brand"]
                   },
                   "quantity": {
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "id",
-                  "product",
-                  "quantity"
-                ]
+                "required": ["id", "product", "quantity"]
               }
             }
           }
@@ -256,11 +231,7 @@ You can access the list of shipments under the `shipments` field. Note that for 
                 "nullable": true
               }
             },
-            "required": [
-              "id",
-              "status",
-              "brand_name"
-            ]
+            "required": ["id", "status", "brand_name"]
           },
           "description": "A list of the shipments for the order."
         },
@@ -408,9 +379,7 @@ You can access the list of shipments under the `shipments` field. Note that for 
               "nullable": true
             }
           },
-          "required": [
-            "created_at"
-          ],
+          "required": ["created_at"],
           "nullable": true
         },
         "original_cart": {
@@ -453,27 +422,16 @@ You can access the list of shipments under the `shipments` field. Note that for 
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id",
-                          "name"
-                        ]
+                        "required": ["id", "name"]
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "brand"
-                    ]
+                    "required": ["id", "name", "brand"]
                   },
                   "quantity": {
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "id",
-                  "product",
-                  "quantity"
-                ]
+                "required": ["id", "product", "quantity"]
               }
             }
           }
@@ -515,11 +473,7 @@ You can access the list of shipments under the `shipments` field. Note that for 
               "type": "string"
             }
           },
-          "required": [
-            "first_name",
-            "last_name",
-            "email"
-          ]
+          "required": ["first_name", "last_name", "email"]
         },
         "reference_id": {
           "type": "string",
@@ -539,11 +493,7 @@ You can access the list of shipments under the `shipments` field. Note that for 
       ]
     }
   },
-  "required": [
-    "data",
-    "event_type",
-    "event_id"
-  ],
+  "required": ["data", "event_type", "event_id"],
   "type": "object"
 }
 ```

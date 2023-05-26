@@ -1,20 +1,18 @@
 ---
-stoplight-id: z7c9bolk6lkc8
+title: "Event: order_batch.completed"
+sidebarTitle: "order_batch.completed"
+description: "Emitted when an order batch is fully processed, which is when all orders are created for each recipient in the order batch."
 ---
 
-# Event: order_batch.created
+**For non-scheduled order batches,** the `order_batch.completed` event is emitted immediately after the order batch is finished processing and all orders have been created. _(This is instantly after the `order_batch.created` webhook event for order batches with 10 or fewer recipients, and shortly after the `order_batch.created` event for order batches with more than 10 recipients.)_
 
-Emitted when a order batch is created in the organization.
-
-**For non-scheduled order batches,** for order batches with 10 or fewer recipients, the `order_batch.created` event will contain all of the orders for each recipient. For order batches with more than 10 recipients, order creation happens asynchronously, and the `order_batch.completed` event is emitted immediately after the orders are created.
-
-**For scheduled order batches,** no order will be created when the order batch is created until the scheduled send time. The `order_batch.completed` event is emitted when the order batch scheduled time is reached, and orders are created for the order batch.
+**For scheduled order batches,** the `order_batch.completed` event is emitted when the order batch scheduled time is reached, and orders are created for the order batch.
 
 ## Example
 
 ```json
 {
-  "event_type": "gift_batch.created",
+  "event_type": "gift_batch.completed",
   "id": "ad097c47-bf12-45c9-8feb-0536a0012c09",
   "data": {
     "id": "bd1fd5b5-6339-4331-a404-66200143ff0f",
@@ -204,12 +202,7 @@ Emitted when a order batch is created in the organization.
         "send_status": {
           "description": "The `pending` status indicates that an order batch is being prepared to be sent out. If it is not scheduled, it is being sent asynchronously. If it is scheduled, it will stay in `pending` state until the scheduled time is reached, at which point it will be processed and moved to `complete`. When it is in `pending` status, no orders are created yet.\\n\\nWhen the order batch is in `complete` status, all orders are created and available.",
           "type": "string",
-          "enum": [
-            "pending",
-            "complete",
-            "failed",
-            "canceled"
-          ]
+          "enum": ["pending", "complete", "failed", "canceled"]
         },
         "from_name": {
           "type": "string",
@@ -304,27 +297,16 @@ Emitted when a order batch is created in the organization.
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "id",
-                                "name"
-                              ]
+                              "required": ["id", "name"]
                             }
                           },
-                          "required": [
-                            "id",
-                            "name",
-                            "brand"
-                          ]
+                          "required": ["id", "name", "brand"]
                         },
                         "quantity": {
                           "type": "integer"
                         }
                       },
-                      "required": [
-                        "id",
-                        "product",
-                        "quantity"
-                      ]
+                      "required": ["id", "product", "quantity"]
                     }
                   }
                 }
@@ -384,11 +366,7 @@ Emitted when a order batch is created in the organization.
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "id",
-                    "status",
-                    "brand_name"
-                  ]
+                  "required": ["id", "status", "brand_name"]
                 },
                 "description": "A list of the shipments for the order."
               },
@@ -536,9 +514,7 @@ Emitted when a order batch is created in the organization.
                     "nullable": true
                   }
                 },
-                "required": [
-                  "created_at"
-                ],
+                "required": ["created_at"],
                 "nullable": true
               },
               "original_cart": {
@@ -581,27 +557,16 @@ Emitted when a order batch is created in the organization.
                                   "type": "string"
                                 }
                               },
-                              "required": [
-                                "id",
-                                "name"
-                              ]
+                              "required": ["id", "name"]
                             }
                           },
-                          "required": [
-                            "id",
-                            "name",
-                            "brand"
-                          ]
+                          "required": ["id", "name", "brand"]
                         },
                         "quantity": {
                           "type": "integer"
                         }
                       },
-                      "required": [
-                        "id",
-                        "product",
-                        "quantity"
-                      ]
+                      "required": ["id", "product", "quantity"]
                     }
                   }
                 }
@@ -643,11 +608,7 @@ Emitted when a order batch is created in the organization.
                     "type": "string"
                   }
                 },
-                "required": [
-                  "first_name",
-                  "last_name",
-                  "email"
-                ]
+                "required": ["first_name", "last_name", "email"]
               },
               "reference_id": {
                 "type": "string",
@@ -689,9 +650,7 @@ Emitted when a order batch is created in the organization.
                 "nullable": true
               }
             },
-            "required": [
-              "first_name"
-            ]
+            "required": ["first_name"]
           },
           "description": "A preview of the first 10 recipients in this order batch. To see all of the recipients, use `/order_batches/:id/recipients`. Recipients contain the original contact information provided for each recipient when the order batch was created."
         },
@@ -734,27 +693,16 @@ Emitted when a order batch is created in the organization.
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id",
-                          "name"
-                        ]
+                        "required": ["id", "name"]
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "brand"
-                    ]
+                    "required": ["id", "name", "brand"]
                   },
                   "quantity": {
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "id",
-                  "product",
-                  "quantity"
-                ]
+                "required": ["id", "product", "quantity"]
               }
             }
           }
@@ -778,9 +726,7 @@ Emitted when a order batch is created in the organization.
         "send_method": {
           "nullable": true,
           "type": "string",
-          "enum": [
-            "link_multiple_custom_list"
-          ],
+          "enum": ["link_multiple_custom_list"],
           "description": "The method for sending a order batch. Currently, the only supported send method is `link_multiple_custom_list` which specifies that a link should be created for each order, but no email should automatically be sent to the recipient."
         },
         "batch_name": {
@@ -808,11 +754,7 @@ Emitted when a order batch is created in the organization.
               "type": "string"
             }
           },
-          "required": [
-            "first_name",
-            "last_name",
-            "email"
-          ]
+          "required": ["first_name", "last_name", "email"]
         },
         "workspace_id": {
           "type": "string",
@@ -841,11 +783,7 @@ Emitted when a order batch is created in the organization.
       ]
     }
   },
-  "required": [
-    "data",
-    "event_type",
-    "event_id"
-  ],
+  "required": ["data", "event_type", "event_id"],
   "type": "object"
 }
 ```

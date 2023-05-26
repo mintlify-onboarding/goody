@@ -1,20 +1,18 @@
 ---
-stoplight-id: uqhp3kpa7195o
+title: "Event: order.delivered"
+sidebarTitle: "order.delivered"
+description: "Emitted when an order has been delivered. If the order has multiple shipments, this is emitted when all shipments have been delivered."
 ---
-
-# Event: order.gift_accepted
-
-Emitted when a gift has been accepted by a recipient, and the final costs of the order have been calculated. You can also view whether they swapped the gift (`is_swapped`) and what they swapped to (`cart`).
 
 ## Example
 
 ```json
 {
-  "event_type": "order.gift_accepted",
+  "event_type": "order.delivered",
   "id": "ad097c47-bf12-45c9-8feb-0536a0012c09",
   "data": {
     "id": "10c588dd-d566-45bf-86e9-c23bd1f1587b",
-    "status": "accepted",
+    "status": "shipped",
     "individual_gift_link": "https://gifts.ongoody.com/gift/vWtUe8lQRJuoyYzKlYeHMkbV",
     "recipient_first_name": "Alena",
     "recipient_last_name": "Kenter",
@@ -43,7 +41,17 @@ Emitted when a gift has been accepted by a recipient, and the final costs of the
         }
       ]
     },
-    "shipments": [],
+    "shipments": [
+      {
+        "id": "9a1a2003-bb03-4409-b7fd-243b2e600e46",
+        "status": "delivered",
+        "brand_name": "Cookie Company",
+        "tracking_carrier": "UPS",
+        "shipped_at": "2023-01-23T00:00:00Z",
+        "delivered_at": "2023-01-26T00:00:00Z",
+        "delivery_eta": "2023-01-26T00:00:00Z"
+      }
+    ],
     "amounts": {
       "amount_product": 1000,
       "amount_shipping": 1000,
@@ -164,27 +172,16 @@ Emitted when a gift has been accepted by a recipient, and the final costs of the
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id",
-                          "name"
-                        ]
+                        "required": ["id", "name"]
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "brand"
-                    ]
+                    "required": ["id", "name", "brand"]
                   },
                   "quantity": {
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "id",
-                  "product",
-                  "quantity"
-                ]
+                "required": ["id", "product", "quantity"]
               }
             }
           }
@@ -244,11 +241,7 @@ Emitted when a gift has been accepted by a recipient, and the final costs of the
                 "nullable": true
               }
             },
-            "required": [
-              "id",
-              "status",
-              "brand_name"
-            ]
+            "required": ["id", "status", "brand_name"]
           },
           "description": "A list of the shipments for the order."
         },
@@ -396,9 +389,7 @@ Emitted when a gift has been accepted by a recipient, and the final costs of the
               "nullable": true
             }
           },
-          "required": [
-            "created_at"
-          ],
+          "required": ["created_at"],
           "nullable": true
         },
         "original_cart": {
@@ -441,27 +432,16 @@ Emitted when a gift has been accepted by a recipient, and the final costs of the
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id",
-                          "name"
-                        ]
+                        "required": ["id", "name"]
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "brand"
-                    ]
+                    "required": ["id", "name", "brand"]
                   },
                   "quantity": {
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "id",
-                  "product",
-                  "quantity"
-                ]
+                "required": ["id", "product", "quantity"]
               }
             }
           }
@@ -503,11 +483,7 @@ Emitted when a gift has been accepted by a recipient, and the final costs of the
               "type": "string"
             }
           },
-          "required": [
-            "first_name",
-            "last_name",
-            "email"
-          ]
+          "required": ["first_name", "last_name", "email"]
         },
         "reference_id": {
           "type": "string",
@@ -527,11 +503,7 @@ Emitted when a gift has been accepted by a recipient, and the final costs of the
       ]
     }
   },
-  "required": [
-    "data",
-    "event_type",
-    "event_id"
-  ],
+  "required": ["data", "event_type", "event_id"],
   "type": "object"
 }
 ```

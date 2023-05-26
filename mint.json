@@ -77,6 +77,26 @@
       ]
     },
     {
+      "group": "Webhooks",
+      "pages": [
+        "webhooks/overview",
+        "webhooks/webhook-security",
+        {
+          "group": "Webhooks",
+          "pages": [
+            "webhooks/webhooks-types/order_batch.created",
+            "webhooks/webhooks-types/order_batch.completed",
+            "webhooks/webhooks-types/order.created",
+            "webhooks/webhooks-types/order.gift_opened",
+            "webhooks/webhooks-types/order.gift_accepted",
+            "webhooks/webhooks-types/order.thank_you_note_added",
+            "webhooks/webhooks-types/order.shipped",
+            "webhooks/webhooks-types/order.delivered"
+          ]
+        }
+      ]
+    },
+    {
       "group": "API Reference",
       "pages": [
         {

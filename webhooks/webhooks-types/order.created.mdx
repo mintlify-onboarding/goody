@@ -1,20 +1,18 @@
 ---
-stoplight-id: oqjryogoroxam
+title: "Event: order.created"
+sidebarTitle: "order.created"
+description: "Emitted when an order has been created and is ready to be opened and accepted (if it's a gift). An individual gift link is available (`individual_gift_link`)."
 ---
-
-# Event: order.gift_opened
-
-Emitted when a gift is first opened. Note that if you open the gift link yourself, you might trigger this event.
 
 ## Example
 
 ```json
 {
-  "event_type": "order.gift_opened",
+  "event_type": "order.created",
   "id": "ad097c47-bf12-45c9-8feb-0536a0012c09",
   "data": {
     "id": "10c588dd-d566-45bf-86e9-c23bd1f1587b",
-    "status": "opened",
+    "status": "created",
     "individual_gift_link": "https://gifts.ongoody.com/gift/vWtUe8lQRJuoyYzKlYeHMkbV",
     "recipient_first_name": "Alena",
     "recipient_last_name": "Kenter",
@@ -164,27 +162,16 @@ Emitted when a gift is first opened. Note that if you open the gift link yoursel
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id",
-                          "name"
-                        ]
+                        "required": ["id", "name"]
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "brand"
-                    ]
+                    "required": ["id", "name", "brand"]
                   },
                   "quantity": {
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "id",
-                  "product",
-                  "quantity"
-                ]
+                "required": ["id", "product", "quantity"]
               }
             }
           }
@@ -244,11 +231,7 @@ Emitted when a gift is first opened. Note that if you open the gift link yoursel
                 "nullable": true
               }
             },
-            "required": [
-              "id",
-              "status",
-              "brand_name"
-            ]
+            "required": ["id", "status", "brand_name"]
           },
           "description": "A list of the shipments for the order."
         },
@@ -396,9 +379,7 @@ Emitted when a gift is first opened. Note that if you open the gift link yoursel
               "nullable": true
             }
           },
-          "required": [
-            "created_at"
-          ],
+          "required": ["created_at"],
           "nullable": true
         },
         "original_cart": {
@@ -441,27 +422,16 @@ Emitted when a gift is first opened. Note that if you open the gift link yoursel
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id",
-                          "name"
-                        ]
+                        "required": ["id", "name"]
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "brand"
-                    ]
+                    "required": ["id", "name", "brand"]
                   },
                   "quantity": {
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "id",
-                  "product",
-                  "quantity"
-                ]
+                "required": ["id", "product", "quantity"]
               }
             }
           }
@@ -503,11 +473,7 @@ Emitted when a gift is first opened. Note that if you open the gift link yoursel
               "type": "string"
             }
           },
-          "required": [
-            "first_name",
-            "last_name",
-            "email"
-          ]
+          "required": ["first_name", "last_name", "email"]
         },
         "reference_id": {
           "type": "string",
@@ -527,11 +493,7 @@ Emitted when a gift is first opened. Note that if you open the gift link yoursel
       ]
     }
   },
-  "required": [
-    "data",
-    "event_type",
-    "event_id"
-  ],
+  "required": ["data", "event_type", "event_id"],
   "type": "object"
 }
 ```
