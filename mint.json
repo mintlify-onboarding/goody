@@ -6,7 +6,10 @@
     "dark": "/logo.png"
   },
   "api": {
-    "baseUrl": "https://api.ongoody.com"
+    "baseUrl": "https://api.ongoody.com",
+    "auth": {
+      "method": "bearer"
+    }
   },
   "favicon": "/favicon.png",
   "colors": {
