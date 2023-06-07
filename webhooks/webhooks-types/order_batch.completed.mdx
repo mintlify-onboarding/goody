@@ -193,8 +193,10 @@ description: "Emitted when an order batch is fully processed, which is when all 
       sent out. If it is not scheduled, it is being sent asynchronously. If it
       is scheduled, it will stay in `pending` state until the scheduled time is
       reached, at which point it will be processed and moved to `complete`. When
-      it is in `pending` status, no orders are created yet.\\n\\nWhen the order
+      it is in `pending` status, no orders are created yet. When the order
       batch is in `complete` status, all orders are created and available.
+
+      Allowed values: `pending` `complete` `failed` `canceled`
     </ResponseField>
     <ResponseField name="from_name" type="string" required>
       The name of the sender. This is displayed on the order and notifications.

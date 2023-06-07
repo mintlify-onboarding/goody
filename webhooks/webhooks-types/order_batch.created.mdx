@@ -184,15 +184,17 @@ description: "Emitted when a order batch is created in the organization."
   An order batch is the primary resource created by the API. Order batches
   contain an array of orders.
   <Expandable title="properties">
-    <ResponseField name="id" type="string<uuid>" required></ResponseField>
+    <ResponseField name="id" type="string<uuid>" required>
+    </ResponseField>
     <ResponseField name="send_status" type="string" required>
       The `pending` status indicates that an order batch is being prepared to be
       sent out. If it is not scheduled, it is being sent asynchronously. If it
       is scheduled, it will stay in `pending` state until the scheduled time is
       reached, at which point it will be processed and moved to `complete`. When
-      it is in `pending` status, no orders are created yet. When the order batch
-      is in `complete` status, all orders are created and available. Allowed
-      values: `pending` `complete` `failed` `canceled`
+      it is in `pending` status, no orders are created yet. When the order
+      batch is in `complete` status, all orders are created and available. 
+      
+      Allowed values: `pending` `complete` `failed` `canceled`
     </ResponseField>
     <ResponseField name="from_name" type="string" required>
       The name of the sender. This is displayed on the order and notifications.
@@ -292,41 +294,36 @@ description: "Emitted when a order batch is created in the organization."
         <ResponseField name="shipments" type="array[object]" required>
           A list of the shipments for the order.
           <Expandable title="properties">
-            <ResponseField
-              name="id"
-              type="string<uuid>"
-              required
-            ></ResponseField>
-            <ResponseField name="status" type="string" required>
-              Allowed values: `pending` `tracking` `shipped` `delivered`
-              `delivered_override` `failed` `failed_unset_tracking`
-              `failed_with_reship`
-            </ResponseField>
-            <ResponseField name="brand_name" type="string" required>
-              The name of the brand that this shipment is from
-            </ResponseField>
-            <ResponseField name="tracking_carrier" type="string">
-              The carrier for this shipment, e.g. UPS.
-            </ResponseField>
-            <ResponseField name="tracking_number" type="string">
-              Only for approved distribution partners.
-            </ResponseField>
-            <ResponseField name="shipped_at" type="string<date-time>">
-              ISO 8601
-            </ResponseField>
-            <ResponseField name="delivered_at" type="string<date-time>">
-              ISO 8601
-            </ResponseField>
-            <ResponseField name="delivery_eta" type="string<date-time>">
-              The estimated delivery time of this shipment.
-            </ResponseField>
+           <ResponseField name="id" type="string<uuid>" required>
+           </ResponseField>
+           <ResponseField name="status" type="string" required>
+            Allowed values: `pending` `tracking` `shipped` `delivered` `delivered_override` `failed` `failed_unset_tracking` `failed_with_reship`
+           </ResponseField>
+           <ResponseField name="brand_name" type="string" required>
+            The name of the brand that this shipment is from
+           </ResponseField>
+           <ResponseField name="tracking_carrier" type="string">
+            The carrier for this shipment, e.g. UPS.
+           </ResponseField>
+           <ResponseField name="tracking_number" type="string">
+            Only for approved distribution partners.
+           </ResponseField>
+           <ResponseField name="shipped_at" type="string<date-time>">
+            ISO 8601
+           </ResponseField>
+           <ResponseField name="delivered_at" type="string<date-time>">
+            ISO 8601
+           </ResponseField>
+           <ResponseField name="delivery_eta" type="string<date-time>">
+            The estimated delivery time of this shipment.
+           </ResponseField>
           </Expandable>
         </ResponseField>
         <ResponseField name="workspace_id" type="string<uuid>">
-          Organizations are sub-divided into workspaces. Orders are contained in
-          workspaces, identified by this ID.
+          Organizations are sub-divided into workspaces. Orders are contained in workspaces, identified by this ID.
         </ResponseField>
-        <ResponseField name="workspace_name" type="string"></ResponseField>
+        <ResponseField name="workspace_name" type="string">
+        </ResponseField>
         <ResponseField name="expires_at" type="string<date-time>">
           For gifts, the date and time the gift is set to expire.
         </ResponseField>
@@ -343,17 +340,13 @@ description: "Emitted when a order batch is created in the organization."
           The number of times the recipient viewed the gift.
         </ResponseField>
         <ResponseField name="is_swapped" type="boolean">
-          If this gift was swapped by the recipient. Swapping allows a recipient
-          to select another product or products, which replaces the `cart`. The
-          original products are saved to `original_cart`.
+          If this gift was swapped by the recipient. Swapping allows a recipient to select another product or products, which replaces the `cart`. The original products are saved to `original_cart`.
         </ResponseField>
         <ResponseField name="order_batch_id" type="string<uuid>">
-          On Goody for Business, all orders are attached to a order batch, which
-          is a collection of one or more orders.
+          On Goody for Business, all orders are attached to a order batch, which is a collection of one or more orders.
         </ResponseField>
         <ResponseField name="amounts" type="object" required>
-          Costs in USD cents (i.e. $1.00 = 100). If the order was swapped,
-          `amounts` displays the most recent amounts (i.e. post-swap).
+          Costs in USD cents (i.e. $1.00 = 100). If the order was swapped, `amounts` displays the most recent amounts (i.e. post-swap).
           <Expandable title="properties">
             <ResponseField name="amount_product" type="integer" required>
               Total cost of the products in this order.
@@ -368,19 +361,16 @@ description: "Emitted when a order batch is created in the organization."
               Total amount of credit applied to this order.
             </ResponseField>
             <ResponseField name="amount_pre_tax_total" type="integer" required>
-              Total cost of the products, shipping, and processing fees in this
-              order.
+              Total cost of the products, shipping, and processing fees in this order.
             </ResponseField>
             <ResponseField name="amount_tax" type="integer">
               Total tax for this order.
             </ResponseField>
             <ResponseField name="amount_total" type="integer">
-              Total cost of the products, shipping, processing fees, tax, and
-              global shipping costs in this order.
+              Total cost of the products, shipping, processing fees, tax, and global shipping costs in this order.
             </ResponseField>
             <ResponseField name="amount_global_relay_cost" type="integer">
-              Total cost of global shipping for this order through the Global
-              Relay service.
+              Total cost of global shipping for this order through the Global Relay service.
             </ResponseField>
           </Expandable>
         </ResponseField>
@@ -399,117 +389,78 @@ description: "Emitted when a order batch is created in the organization."
             <ResponseField name="accepted_at" type="string<date-time>">
               For gifts, when the recipient accepted the order.
             </ResponseField>
-            <ResponseField
-              name="pending_payment_at"
-              type="string<date-time>"
-              required
-            >
+            <ResponseField name="pending_payment_at" type="string<date-time>" required>
               When the order entered pending payment status.
             </ResponseField>
             <ResponseField name="paid_at" type="string<date-time>">
               When the order was paid for.
             </ResponseField>
             <ResponseField name="shipped_at" type="string<date-time>">
-              When the order was first shipped. If there are multiple shipments,
-              this is when the first shipment shipped.
+              When the order was first shipped. If there are multiple shipments, this is when the first shipment shipped.
             </ResponseField>
             <ResponseField name="delivered_at" type="string<date-time>">
-              When the order was delivered. If there are multiple shipments,
-              this is when all shipments were delivered.
+              When the order was delivered. If there are multiple shipments, this is when all shipments were delivered.
             </ResponseField>
           </Expandable>
         </ResponseField>
         <ResponseField name="original_cart" type="object">
-          If this order is a gift that was swapped, this displays the original
-          cart that was sent to the recipient.
+          If this order is a gift that was swapped, this displays the original cart that was sent to the recipient.
           <Expandable title="properties">
-            <ResponseField name="id" type="string<uuid>"></ResponseField>
+            <ResponseField name="id" type="string<uuid>">
+            </ResponseField>
             <ResponseField name="items" type="array[object]">
               <Expandable title="properties">
-                <ResponseField
-                  name="id"
-                  type="string<uuid>"
-                  required
-                ></ResponseField>
+                <ResponseField name="id" type="string<uuid>" required>
+                </ResponseField>
                 <ResponseField name="product" type="object" required>
                   <Expandable title="properties">
-                    <ResponseField
-                      name="id"
-                      type="string<uuid>"
-                      required
-                    ></ResponseField>
-                    <ResponseField
-                      name="name"
-                      type="string"
-                      required
-                    ></ResponseField>
+                    <ResponseField name="id" type="string<uuid>" required>
+                    </ResponseField>
+                    <ResponseField name="name" type="string" required>
+                    </ResponseField>
                     <ResponseField name="brand" type="object" required>
                       The brand that this product is from.
                       <Expandable title="properties">
-                        <ResponseField
-                          name="id"
-                          type="string<uuid>"
-                          required
-                        ></ResponseField>
-                        <ResponseField
-                          name="name"
-                          type="string"
-                          required
-                        ></ResponseField>
+                        <ResponseField name="id" type="string<uuid>" required>
+                        </ResponseField>
+                        <ResponseField name="name" type="string" required>
+                        </ResponseField>
                       </Expandable>
                     </ResponseField>
                   </Expandable>
                 </ResponseField>
-                <ResponseField
-                  name="quantity"
-                  type="integer"
-                  required
-                ></ResponseField>
+                <ResponseField name="quantity" type="integer" required>
+                </ResponseField>
               </Expandable>
             </ResponseField>
           </Expandable>
         </ResponseField>
         <ResponseField name="original_amounts" type="object">
-          If this order is a gift that was swapped, this displays the original
-          amounts of the cart that was sent to the recipient.
+          If this order is a gift that was swapped, this displays the original amounts of the cart that was sent to the recipient.
           <Expandable title="properties">
-            <ResponseField
-              name="original_amount_product"
-              type="integer"
-            ></ResponseField>
-            <ResponseField
-              name="original_amount_shipping"
-              type="integer"
-            ></ResponseField>
-            <ResponseField
-              name="original_amount_credit_applied"
-              type="integer"
-            ></ResponseField>
-            <ResponseField
-              name="original_amount_pre_tax_total"
-              type="integer"
-            ></ResponseField>
+            <ResponseField name="original_amount_product" type="integer">
+            </ResponseField>
+            <ResponseField name="original_amount_shipping" type="integer">
+            </ResponseField>
+            <ResponseField name="original_amount_credit_applied" type="integer">
+            </ResponseField>
+            <ResponseField name="original_amount_pre_tax_total" type="integer">
+            </ResponseField>
           </Expandable>
         </ResponseField>
         <ResponseField name="sender" type="object" required>
           The Goody user who sent this order.
           <Expandable title="properties">
-            <ResponseField
-              name="first_name"
-              type="string"
-              required
-            ></ResponseField>
-            <ResponseField
-              name="last_name"
-              type="string"
-              required
-            ></ResponseField>
-            <ResponseField name="email" type="string" required></ResponseField>
+            <ResponseField name="first_name" type="string" required>
+            </ResponseField>
+            <ResponseField name="last_name" type="string" required>
+            </ResponseField>
+            <ResponseField name="email" type="string" required>
+            </ResponseField>
           </Expandable>
         </ResponseField>
         <ResponseField name="reference_id" type="string" required>
-          The reference ID displayed on receipts and other locations as the ID
-          for this order.
+          The reference ID displayed on receipts and other locations as the ID for this order.
         </ResponseField>
       </Expandable>
     </ResponseField>
@@ -517,91 +468,61 @@ description: "Emitted when a order batch is created in the organization."
       The total number of recipients in this order batch.
     </ResponseField>
     <ResponseField name="recipients_preview" type="integer" required>
-      A preview of the first 10 recipients in this order batch. To see all of
-      the recipients, use `/order_batches/:id/recipients`. Recipients contain
-      the original contact information provided for each recipient when the
-      order batch was created.
+      A preview of the first 10 recipients in this order batch. To see all of the recipients, use `/order_batches/:id/recipients`. Recipients contain the original contact information provided for each recipient when the order batch was created.
       <Expandable title="properties">
-        <ResponseField name="first_name" type="string" required></ResponseField>
-        <ResponseField name="last_name" type="string"></ResponseField>
-        <ResponseField name="email" type="string"></ResponseField>
+        <ResponseField name="first_name" type="string" required>
+        </ResponseField>
+        <ResponseField name="last_name" type="string">
+        </ResponseField>
+        <ResponseField name="email" type="string">
+        </ResponseField>
       </Expandable>
     </ResponseField>
     <ResponseField name="cart" type="object" required>
-      The cart that was sent for this order batch. This is the original cart
-      that was created for this order batch. If individual orders were swapped,
-      this still remains the same, whereas orders' `cart` would change if they
-      were swapped.
+      The cart that was sent for this order batch. This is the original cart that was created for this order batch. If individual orders were swapped, this still remains the same, whereas orders' `cart` would change if they were swapped.
       <Expandable title="properties">
-        <ResponseField name="id" type="string<uuid>"></ResponseField>
+        <ResponseField name="id" type="string<uuid>">
+        </ResponseField>
         <ResponseField name="items" type="array[object]">
+        <Expandable title="properties">
+        <ResponseField name="id" type="string<uuid>" required>
+        </ResponseField>
+        <ResponseField name="product" type="object" required>
           <Expandable title="properties">
-            <ResponseField
-              name="id"
-              type="string<uuid>"
-              required
-            ></ResponseField>
-            <ResponseField name="product" type="object" required>
+            <ResponseField name="id" type="string<uuid>" required>
+            </ResponseField>
+            <ResponseField name="name" type="string" required>
+            </ResponseField>
+            <ResponseField name="brand" type="object" required>
               <Expandable title="properties">
-                <ResponseField
-                  name="id"
-                  type="string<uuid>"
-                  required
-                ></ResponseField>
-                <ResponseField
-                  name="name"
-                  type="string"
-                  required
-                ></ResponseField>
-                <ResponseField name="brand" type="object" required>
-                  <Expandable title="properties">
-                    <ResponseField
-                      name="id"
-                      type="string<uuid>"
-                      required
-                    ></ResponseField>
-                    <ResponseField
-                      name="name"
-                      type="string"
-                      required
-                    ></ResponseField>
-                  </Expandable>
+                <ResponseField name="id" type="string<uuid>" required>
+                </ResponseField>
+                <ResponseField name="name" type="string" required>
                 </ResponseField>
               </Expandable>
             </ResponseField>
-            <ResponseField
-              name="quantity"
-              type="integer"
-              required
-            ></ResponseField>
           </Expandable>
+        </ResponseField>
+        <ResponseField name="quantity" type="integer" required>
+        </ResponseField>
+        </Expandable>
         </ResponseField>
       </Expandable>
     </ResponseField>
     <ResponseField name="is_scheduled_send" type="boolean">
-      Whether this order batch was set up as a scheduled send. This stays as
-      `true` after the scheduled send is complete. To determine if the order
-      batch is scheduled to be sent for the future, check if `status` is
-      `pending` and `scheduled_send_on` is in the future. When a order batch is
-      scheduled, orders are only created on the scheduled send date.
+      Whether this order batch was set up as a scheduled send. This stays as `true` after the scheduled send is complete. To determine if the order batch is scheduled to be sent for the future, check if `status` is `pending` and `scheduled_send_on` is in the future. When a order batch is scheduled, orders are only created on the scheduled send date.
     </ResponseField>
     <ResponseField name="scheduled_send_on" type="string<date-time>">
-      The date and time the order batch is scheduled to be sent. This will be
-      `null` if the order batch is not a scheduled send. This field remains
-      after the scheduled send completes. ISO 8601, UTC.
+      The date and time the order batch is scheduled to be sent. This will be `null` if the order batch is not a scheduled send. This field remains after the scheduled send completes. ISO 8601, UTC.
     </ResponseField>
     <ResponseField name="expires_at" type="string<date-time>">
       The date and time the order batch is set to expire. ISO 8601, UTC.
     </ResponseField>
     <ResponseField name="send_method" type="string">
-      The method for sending a order batch. Currently, the only supported send
-      method is `link_multiple_custom_list` which specifies that a link should
-      be created for each order, but no email should automatically be sent to
-      the recipient. Allowed value: `link_multiple_custom_list`
+      The method for sending a order batch. Currently, the only supported send method is `link_multiple_custom_list` which specifies that a link should be created for each order, but no email should automatically be sent to the recipient. Allowed value: `link_multiple_custom_list`
     </ResponseField>
     <ResponseField name="batch_name" type="string">
-      An internal name for the order batch, falling back to an auto-generated
-      batch name. Not displayed to recipients.
+      An internal name for the order batch, falling back to an auto-generated batch name. Not displayed to recipients.
     </ResponseField>
     <ResponseField name="card_id" type="string<uuid>">
       The digital greeting card on this order batch.
@@ -609,19 +530,21 @@ description: "Emitted when a order batch is created in the organization."
     <ResponseField name="sender" type="object" required>
       The sender of the order batch.
       <Expandable title="properties">
-        <ResponseField name="first_name" type="string" required></ResponseField>
-        <ResponseField name="last_name" type="string" required></ResponseField>
-        <ResponseField name="email" type="string" required></ResponseField>
+        <ResponseField name="first_name" type="string" required>
+        </ResponseField>
+        <ResponseField name="last_name" type="string" required>
+        </ResponseField>
+        <ResponseField name="email" type="string" required>
+        </ResponseField>
       </Expandable>
     </ResponseField>
     <ResponseField name="workplace_id" type="string<uuid>">
-      Organizations are sub-divided into workspaces. Order batches are contained
-      in workspaces, identified by this ID.
+      Organizations are sub-divided into workspaces. Order batches are contained in workspaces, identified by this ID.
     </ResponseField>
-    <ResponseField name="workplace_name" type="string"></ResponseField>
+    <ResponseField name="workplace_name" type="string">
+    </ResponseField>
     <ResponseField name="reference_id" type="string" required>
-      The reference ID displayed on receipts and other locations as the ID for
-      this order batch.
+      The reference ID displayed on receipts and other locations as the ID for this order batch.
     </ResponseField>
   </Expandable>
 </ResponseField>
