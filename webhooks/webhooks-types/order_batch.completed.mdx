@@ -483,6 +483,10 @@ description: "Emitted when an order batch is fully processed, which is when all 
     <ResponseField name="cart" type="object" required>
       The cart that was sent for this order batch. This is the original cart that was created for this order batch. If individual orders were swapped, this still remains the same, whereas orders' `cart` would change if they were swapped.
       <Expandable title="properties">
+        <ResponseField name="id" type="string<uuid>">
+        </ResponseField>
+        <ResponseField name="items" type="array[object]">
+        <Expandable title="properties">
         <ResponseField name="id" type="string<uuid>" required>
         </ResponseField>
         <ResponseField name="product" type="object" required>
@@ -502,6 +506,8 @@ description: "Emitted when an order batch is fully processed, which is when all 
           </Expandable>
         </ResponseField>
         <ResponseField name="quantity" type="integer" required>
+        </ResponseField>
+        </Expandable>
         </ResponseField>
       </Expandable>
     </ResponseField>
